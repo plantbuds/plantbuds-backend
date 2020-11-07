@@ -127,6 +127,8 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 
+.idea/
+
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=pycharm
 
