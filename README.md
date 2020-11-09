@@ -13,28 +13,40 @@ Brought to you by Chris, Hana, and Lindsey - a.k.a. the **☆ ♡ ☆ Moe Moe Kr
 ---
 ### (๑˃ᴗ˂)ﻭ LGTM! (๑˃ᴗ˂)ﻭ
 ---
-_The comment every author hopes for, "LGTM" (a.k.a. "Looks good to me!") lets them know that you couldn't find any fault with the PR. Leave these emojis to let the author know they've done a **subarashī** job!_
+The comment every author hopes for, "LGTM" (a.k.a. "Looks good to me!") lets them know that you couldn't find any fault with the PR. Leave these emojis to let the author know they've done a **subarashī** job!
+
 ☆*:.｡.o(≧▽≦)o.｡.:*☆
+
 (☞° ヮ °)☞ Great job, {author}-san! ☜(° ヮ °☜)
+
 (ﾉ ◕ ヮ ◕)ﾉ\*:･ﾟ ✧
 ---
 ### ( ˘ ɜ˘) ♬♪♫ Requesting Changes ฅ(•ㅅ•❀)ฅ
 ---
-_When you want to request changes from a fellow **tomodachi**, use these kawaii emojis!_
+When you want to request changes from a fellow **tomodachi**, use these kawaii emojis!
+
 (・∀・)ノ
+
 (￣ ω ￣)/
+
 ଘ(੭ˊ꒳ˋ)੭✧
+
 (　･ω･) ☞
 ---
 ### (●˙꒳˙●) Nits/Small Changes (●˙꒳˙●)
 ---
-_The logic looks good, but maybe there's some small syntax fixes or tiny updates that will make the code **utsukushii**!_
+The logic looks good, but maybe there's some small syntax fixes or tiny updates that will make the code **utsukushii**!
+
 (๑•́ ω •̀๑) C-can you pwease { nit description }
+
 |´∀ ｀ ●) Nit: { nit description }
+
 (v〃∇〃)ハ(〃∇〃v)
 ---
 ### (_≧ω≦_) Nits/Small Changes (Again) ٩(｡•́‿•̀｡)۶
 ---
-_Some tests will make this PR even more **ggakoiiii**!_
+Some tests will make this PR even more **ggakoiiii**!
+
 /╲/\( •̀ ω •́ )/\╱\ Unit test Spider-chan has appeared! Spider-chan would like some unit tests on this kawaii logic!
+
 (☞° ヮ °)☞ Awesome! You know what would make this better? Tests! ☜(° ヮ °☜)
