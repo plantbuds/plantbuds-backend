@@ -9,13 +9,16 @@ from django.db import models
 
 
 class PbEncyclopedia(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     name = models.TextField(blank=True, null=True)
     water = models.TextField(blank=True, null=True)  # This field type is a guess.
     sun = models.TextField(blank=True, null=True)  # This field type is a guess.
     propagation = models.TextField(blank=True, null=True)  # This field type is a guess.
     hardiness = models.TextField(blank=True, null=True)  # This field type is a guess.
     url = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         managed = False
