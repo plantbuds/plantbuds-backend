@@ -1,30 +1,40 @@
-from django.http import HttpResponse
-import pyrebase
-
-firebaseConfig = {
-    'apiKey': "${FIREBASE_KEY}",
-    'authDomain': "plantbuds-110.firebaseapp.com",
-    'databaseURL': "https://plantbuds-110.firebaseio.com",
-    'projectId': "plantbuds-110",
-    'storageBucket': "plantbuds-110.appspot.com",
-    'messagingSenderId': "165337168830",
-    'appId': "1:165337168830:web:2ab03bb5a5565a13f2d7ef",
-    'measurementId': "G-BYFCNFSWJL",
-    'serviceAccount': "./credentials.json",
-}
-firebase = pyrebase.initialize_app(firebaseConfig)
-db = firebase.database()
+from django.contrib.auth.models import User, Group
+from django.http import HttpResponse, JsonResponse
+from rest_framework import viewsets, permissions
+from .models import PbEncyclopedia
+from .serializers import EncyclopediaSerializer, UserSerializer, GroupSerializer
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the api index.")
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
-# Example route to retrieve data
-def get_user(request, user_id):
-    if request.method == 'GET':
-        users = db.child("people").child(user_id).get()
-        return HttpResponse(f"{users.val()}")
-    else:
-        # Normally this would be a 500 Bad Request code
-        return HttpResponse("Invalid request")
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class EncyclopediaViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows the encyclopedia to be viewed or edited
+    """
+    queryset = PbEncyclopedia.objects.all()
+    serializer_class = EncyclopediaSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+# Return list of all encyclopedia entries (test function, not REST!!)
+def encyclopedia(request):
+    if request.method == "GET":
+        plant_list = PbEncyclopedia.objects.all()
+        serializer = EncyclopediaSerializer(plant_list, many=True)
+        return JsonResponse(serializer.data, safe=False)

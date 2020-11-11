@@ -1,3 +1,4 @@
 django
-pyrebase4
+djangorestframework
+psycopg2
 python-dotenv
