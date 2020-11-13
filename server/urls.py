@@ -17,13 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from api import views
+from .views import Home
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
 router.register(r'encyclopedia', views.EncyclopediaViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('rest-auth/google/', views.GoogleLogin.as_view()),
+    path('accounts/', include('allauth.urls')),
+    path('', Home.as_view(), name='home'),
 ]

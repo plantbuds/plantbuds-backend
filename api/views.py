@@ -1,8 +1,14 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
 from rest_framework import viewsets, permissions
 from .models import PbEncyclopedia
-from .serializers import EncyclopediaSerializer, UserSerializer, GroupSerializer
+from .serializers import EncyclopediaSerializer, UserSerializer
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from rest_auth.registration.views import SocialLoginView
+
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -14,15 +20,6 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-
 class EncyclopediaViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows the encyclopedia to be viewed or edited
@@ -30,11 +27,3 @@ class EncyclopediaViewSet(viewsets.ModelViewSet):
     queryset = PbEncyclopedia.objects.all()
     serializer_class = EncyclopediaSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-
-# Return list of all encyclopedia entries (test function, not REST!!)
-def encyclopedia(request):
-    if request.method == "GET":
-        plant_list = PbEncyclopedia.objects.all()
-        serializer = EncyclopediaSerializer(plant_list, many=True)
-        return JsonResponse(serializer.data, safe=False)
