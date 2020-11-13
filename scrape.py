@@ -7,10 +7,11 @@ import sys
 
 class PlantScraper(object):
     def __init__(self, start, end, collected):
-        self.pageRange = range(start, end + 1)
         self.plantDB = dict()
         self.plantList = []
         self.collected = collected
+        self.pageRange = set(list(range(start, end+1))) - self.collected
+
 
     def getInfo(self, url, i):
         # Pull URL, parse with bs4
@@ -78,9 +79,11 @@ class PlantScraper(object):
 
 if __name__ == '__main__':
     try:
-        collected = set(list(pd.read_csv('plantDB.csv', header=None).set_index(0).index))
+        collected = set(list(pd.read_csv('plantDB2.csv', header=None).set_index(0).index))
     except:
         collected = set()
+
+    print("to go: ", int(sys.argv[2]) - len(collected))
 
     if len(sys.argv) < 3 or int(sys.argv[2]) <= int(sys.argv[1]):
         print('Usage is: python scrape.py {start_index} {end_index}')
@@ -93,6 +96,6 @@ if __name__ == '__main__':
     df = pd.DataFrame(scraper.plantList).set_index('id')
 
     # fileName = 'plantDB_' + sys.argv[1] + '_' + sys.argv[2] + '.csv' 
-    fileName = 'plantDB.csv'
+    fileName = 'plantDB2.csv'
     with open(fileName, 'a') as f:
         df.to_csv(f, header=False)
