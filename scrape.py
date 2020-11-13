@@ -1,45 +1,43 @@
-import json
 import pandas as pd
 from bs4 import BeautifulSoup
-from html.parser import HTMLParser
 import requests
 from tqdm import tqdm
 import sys
 
 
-class plantScraper(object):
+class PlantScraper(object):
     def __init__(self, start, end, collected):
         self.plantDB = dict()
         self.plantList = []
         self.collected = collected
         self.pageRange = set(list(range(start, end+1))) - self.collected
 
-        
+
     def getInfo(self, url, i):
         # Pull URL, parse with bs4
         req = requests.get(url)
         bs4_res = BeautifulSoup(req.text, 'html.parser')
-        
+
         currPlant = dict()
 
         ### Information to Parse ###
-        
+
         # Plant Index
         currPlant['id'] = i
         # Plant Name
         try:
-            currPlant['name'] = bs4_res.find('div', {'class':'left-column-layout plants-files'}).h1.text
+            currPlant['name'] = bs4_res.find('div', {'class': 'left-column-layout plants-files'}).h1.text
         except:
             currPlant['name'] = None
         # URL
         currPlant['url'] = url
         # img
         try:
-            currPlant['img'] = bs4_res.find('div', {'class':'plantfiles-gallery-image'}).img['src']
+            currPlant['img'] = bs4_res.find('div', {'class': 'plantfiles-gallery-image'}).img['src']
         except:
             currPlant['img'] = None
         # Family, Genus, Species
-        for e in bs4_res.find('div', {'class' : 'plant-details'}).find_all('tr'):
+        for e in bs4_res.find('div', {'class': 'plant-details'}).find_all('tr'):
             try:
                 currPlant[e.find('td').text[:-1]] = e.find('a').text
             except:
@@ -49,7 +47,7 @@ class plantScraper(object):
             if e not in currPlant:
                 currPlant[e] = None
         # Hardiness
-        valid_h4 = ['Hardiness:', 'Propagation Methods:', 'Water Requirements:','Sun Exposure:', "Where to Grow:"]
+        valid_h4 = ['Hardiness:', 'Propagation Methods:', 'Water Requirements:', 'Sun Exposure:', "Where to Grow:"]
         for item in valid_h4:
             try:
                 result = bs4_res.find(text=item).next
@@ -64,8 +62,8 @@ class plantScraper(object):
             except:
                 currPlant[item] = None
 
-        return currPlant 
-    
+        return currPlant
+
     def iterate(self):
         # Iterate through Page Range
         for i in tqdm(self.pageRange):
@@ -77,6 +75,7 @@ class plantScraper(object):
                 self.plantList.append(self.getInfo(url, i))
             except:
                 continue
+
 
 if __name__ == '__main__':
     try:
@@ -91,7 +90,7 @@ if __name__ == '__main__':
         print('end_index must be > start_index')
         sys.exit()
 
-    scraper = plantScraper(int(sys.argv[1]), int(sys.argv[2]), collected)
+    scraper = PlantScraper(int(sys.argv[1]), int(sys.argv[2]), collected)
     scraper.iterate()
 
     df = pd.DataFrame(scraper.plantList).set_index('id')

@@ -1,4 +1,7 @@
+bs4
 django
 djangorestframework
+pandas
 psycopg2
 python-dotenv
+tqdm
