@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Group
 from django.http import HttpResponse, JsonResponse
 from rest_framework import viewsets, permissions
 from .models import PbEncyclopedia
-from .serializers import EncyclopediaSerializer, UserSerializer, GroupSerializer
+from .serializers import EncyclopediaSerializer, UserSerializer, GroupSerializer, PlantProfileSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -30,6 +30,11 @@ class EncyclopediaViewSet(viewsets.ModelViewSet):
     queryset = PbEncyclopedia.objects.all()
     serializer_class = EncyclopediaSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class PlantProfile(viewsets.ModelViewSet):
+    queryset = PlantProfile.objects.all()
+    serializer_class = PlantProfileSerializer
+    permission_classses = [permissions.IsAuthenticated]
 
 
 # Return list of all encyclopedia entries (test function, not REST!!)
