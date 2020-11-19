@@ -5,7 +5,7 @@ from rest_framework import viewsets, permissions
 
 from server.settings import GOOGLE_CLIENT_ID
 from .models import PbEncyclopedia
-from .serializers import EncyclopediaSerializer, UserSerializer, SocialSerializer
+from .serializers import EncyclopediaSerializer, UserSerializer, SocialSerializer, PlantProfileSerializer
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -35,6 +35,12 @@ class EncyclopediaViewSet(viewsets.ModelViewSet):
     queryset = PbEncyclopedia.objects.all()
     serializer_class = EncyclopediaSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class PlantProfile(viewsets.ModelViewSet):
+    queryset = PlantProfile.objects.all()
+    serializer_class = PlantProfileSerializer
+    permission_classses = [permissions.IsAuthenticated]
 
 
 @api_view(http_method_names=['POST'])
