@@ -8,6 +8,21 @@
 from django.db import models
 from django.contrib.postgres import fields
 
+class Users(models.Model):
+    id = models.AutoField(primary_key=True)
+    photo = models.TextField(blank=True, null=True)
+    username = models.TextField(null=True)  # Should this be allowed to be blank?
+    password = models.TextField(null=True)  # This too
+    email = models.TextField(null=True)  # This as well
+    USDA_zone = models.TextField(blank=True, null=True)
+    receive_water_notif = models.BooleanField(blank=True, null=True)
+    receive_repot_notif = models.BooleanField(blank=True, null=True)
+    receive_fertilizing_notif = models.BooleanField(blank=True, null=True)
+    notif_time = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.username
+
 class PbEncyclopedia(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.TextField(blank=True, null=True)
