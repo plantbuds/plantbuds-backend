@@ -30,6 +30,7 @@ class UserProfile(models.Model):
     class Meta:
         db_table = 'user_profiles'
 
+
 class PbEncyclopedia(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.TextField(blank=True, null=True)
@@ -45,6 +46,7 @@ class PbEncyclopedia(models.Model):
     class Meta:
         managed = False
         db_table = 'pb_encyclopedia'
+
 
 class PlantProfile(models.Model):
     id = models.AutoField(primary_key=True)

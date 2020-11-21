@@ -3,9 +3,9 @@ from django.contrib.sites import requests
 from django.db.utils import IntegrityError
 from rest_framework import viewsets, permissions
 
-from .models import PbEncyclopedia, UserProfile
+from .models import PbEncyclopedia, UserProfile, PlantProfile
 from .serializers import EncyclopediaSerializer, UserSerializer, UserProfileSerializer, \
-    SocialSerializer  # PlantProfileSerializer
+    SocialSerializer, PlantProfileSerializer
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -123,9 +123,8 @@ class EncyclopediaViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-"""
 class PlantProfile(viewsets.ModelViewSet):
     queryset = PlantProfile.objects.all()
     serializer_class = PlantProfileSerializer
-    permission_classses = [permissions.IsAuthenticated]
-"""
+    permission_classes = [permissions.IsAuthenticated]
+
