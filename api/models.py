@@ -7,6 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.postgres import fields
 
 
 class UserProfile(models.Model):
@@ -29,7 +30,6 @@ class UserProfile(models.Model):
     class Meta:
         db_table = 'user_profiles'
 
-
 class PbEncyclopedia(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.TextField(blank=True, null=True)
@@ -45,3 +45,28 @@ class PbEncyclopedia(models.Model):
     class Meta:
         managed = False
         db_table = 'pb_encyclopedia'
+
+class PlantProfile(models.Model):
+    id = models.AutoField(primary_key=True)
+    plant_id = models.IntegerField(blank=True, null=True)
+    user_id = models.IntegerField(blank=True,null=False)
+    plant_name = models.TextField(blank=True, null=True) 
+    nickname = models.TextField(blank=True, null=True)
+    photo = models.TextField(blank=True, null=True)
+    water_history = fields.ArrayField(models.DateField(blank=True, null=True))
+    fertilize_history = fields.ArrayField(models.DateField(blank=True, null=True))
+    repot_history = fields.ArrayField(models.DateField(blank=True, null=True))
+    water_frequency = models.IntegerField(blank=True, null=True) 
+    fertilize_frequency = models.IntegerField(blank=True, null=True)
+    repot_frequency = models.IntegerField(blank=True, null=True)
+    water_next_notif = models.DateField(blank=True, null=True)
+    fertilize_next_notif = models.DateField(blank=True, null=True) 
+    repot_next_notif = models.DateField(blank=True, null=True)
+    notes = fields.ArrayField(models.TextField(blank=True, null=True))
+
+    def __str__(self):
+        return self.plant_id
+
+    class Meta:
+        managed = False
+        db_table = 'plant_profile'
