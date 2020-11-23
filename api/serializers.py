@@ -19,7 +19,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class EncyclopediaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PbEncyclopedia
-        fields = ['id', 'name', 'water', 'sun', 'propagation', 'hardiness', 'url']
+        fields = '__all__'
 
 
 class PlantProfileSerializer(serializers.HyperlinkedModelSerializer):

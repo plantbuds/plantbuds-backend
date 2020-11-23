@@ -34,11 +34,16 @@ class UserProfile(models.Model):
 class PbEncyclopedia(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.TextField(blank=True, null=True)
-    water = models.TextField(blank=True, null=True)  # This field type is a guess.
-    sun = models.TextField(blank=True, null=True)  # This field type is a guess.
-    propagation = models.TextField(blank=True, null=True)  # This field type is a guess.
-    hardiness = models.TextField(blank=True, null=True)  # This field type is a guess.
+    water = fields.ArrayField(models.TextField(blank=True, null=True))
+    sun = fields.ArrayField(models.TextField(blank=True, null=True))
+    propagation = fields.ArrayField(models.TextField(blank=True, null=True))
+    hardiness = fields.ArrayField(models.TextField(blank=True, null=True))
     url = models.TextField(blank=True, null=True)
+    family = models.TextField(blank=True, null=True)
+    genus = models.TextField(blank=True, null=True)
+    species = models.TextField(blank=True, null=True)
+    where_to_grow = fields.ArrayField(models.TextField(blank=True, null=True))
+    img = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -50,9 +55,9 @@ class PbEncyclopedia(models.Model):
 
 class PlantProfile(models.Model):
     id = models.AutoField(primary_key=True)
-    plant_id = models.IntegerField(blank=True, null=True)
+    plant_id = models.ForeignKey(PbEncyclopedia, on_delete=models.CASCADE)
     user_id = models.IntegerField(blank=True,null=False)
-    plant_name = models.TextField(blank=True, null=True) 
+    plant_name = models.TextField(blank=True,  null=True)
     nickname = models.TextField(blank=True, null=True)
     photo = models.TextField(blank=True, null=True)
     water_history = fields.ArrayField(models.DateField(blank=True, null=True))
