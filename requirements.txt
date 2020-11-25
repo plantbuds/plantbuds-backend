@@ -1,8 +1,13 @@
 bs4
 django
+django-allauth
+django-rest-auth
 djangorestframework
 django-filter
+google-auth
 pandas
 psycopg2
 python-dotenv
+social-auth-app-django
+social-auth-core
 tqdm

@@ -42,4 +42,22 @@ class Migration(migrations.Migration):
                 ('notif_time', models.DateTimeField(blank=True, null=True)),
             ],
         ),
+       migrations.CreateModel(
+            name='UserProfile',
+            fields=[
+                ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('photo', models.TextField(blank=True, null=True)),
+                ('username', models.TextField(null=True)),
+                ('password', models.TextField(null=True)),
+                ('email', models.TextField(null=True)),
+                ('USDA_zone', models.TextField(blank=True, null=True)),
+                ('receive_water_notif', models.BooleanField(blank=True, null=True)),
+                ('receive_repot_notif', models.BooleanField(blank=True, null=True)),
+                ('receive_fertilizing_notif', models.BooleanField(blank=True, null=True)),
+                ('notif_time', models.DateTimeField(blank=True, null=True)),
+            ],
+            options={
+                'db_table': 'user_profiles',
+            },
+        ),
     ]

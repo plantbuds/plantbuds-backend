@@ -9,12 +9,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres import fields
 
-class Users(models.Model):
+
+class UserProfile(models.Model):
     id = models.AutoField(primary_key=True)
+    auth_user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    google_id = models.TextField(blank=True, null=True, unique=True)
     photo = models.TextField(blank=True, null=True)
-    username = models.TextField(null=True)  # Should this be allowed to be blank?
-    password = models.TextField(null=True)  # This too
-    email = models.TextField(null=True)  # This as well
+    username = models.TextField(blank=True, null=True, unique=True)
+    password = models.TextField(blank=True, null=True)
+    email = models.TextField(null=True, unique=True)
     USDA_zone = models.TextField(blank=True, null=True)
     receive_water_notif = models.BooleanField(blank=True, null=True)
     receive_repot_notif = models.BooleanField(blank=True, null=True)
@@ -22,16 +25,25 @@ class Users(models.Model):
     notif_time = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return self.username
+        return self.email
+
+    class Meta:
+        db_table = 'user_profiles'
+
 
 class PbEncyclopedia(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.TextField(blank=True, null=True)
-    water = models.TextField(blank=True, null=True)  # This field type is a guess.
-    sun = models.TextField(blank=True, null=True)  # This field type is a guess.
-    propagation = models.TextField(blank=True, null=True)  # This field type is a guess.
-    hardiness = models.TextField(blank=True, null=True)  # This field type is a guess.
+    water = fields.ArrayField(models.TextField(blank=True, null=True))
+    sun = fields.ArrayField(models.TextField(blank=True, null=True))
+    propagation = fields.ArrayField(models.TextField(blank=True, null=True))
+    hardiness = fields.ArrayField(models.TextField(blank=True, null=True))
     url = models.TextField(blank=True, null=True)
+    family = models.TextField(blank=True, null=True)
+    genus = models.TextField(blank=True, null=True)
+    species = models.TextField(blank=True, null=True)
+    where_to_grow = fields.ArrayField(models.TextField(blank=True, null=True))
+    img = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -39,6 +51,7 @@ class PbEncyclopedia(models.Model):
     class Meta:
         managed = False
         db_table = 'pb_encyclopedia'
+
 
 class PlantProfile(models.Model):
     id = models.AutoField(primary_key=True)
