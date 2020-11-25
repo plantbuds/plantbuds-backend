@@ -21,6 +21,7 @@ from api import views
 router = routers.DefaultRouter()
 router.register(r'users', views.UserProfileViewSet)
 router.register(r'encyclopedia', views.EncyclopediaViewSet)
+router.register(r'plantprofile', views.PlantProfileViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),

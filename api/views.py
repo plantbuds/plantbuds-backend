@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.sites import requests
 from django.db.utils import IntegrityError
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
 
 from .models import PbEncyclopedia, UserProfile, PlantProfile
@@ -123,8 +124,17 @@ class EncyclopediaViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class PlantProfile(viewsets.ModelViewSet):
+class PlantProfileViewSet(viewsets.ModelViewSet):
     queryset = PlantProfile.objects.all()
     serializer_class = PlantProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        """
+        Get a user's list of plant profiles
+        """
+        queryset = PlantProfile.objects.all()
+        username = self.request.query_params.get('username', None)
+        if username is not None:
+            queryset = queryset.filter(user=User.objects.get(username=username))
+        return queryset

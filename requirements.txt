@@ -3,6 +3,7 @@ django
 django-allauth
 django-rest-auth
 djangorestframework
+django-filter
 google-auth
 pandas
 psycopg2
