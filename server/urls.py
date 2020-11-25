@@ -22,6 +22,7 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'encyclopedia', views.EncyclopediaViewSet)
+router.register(r'plantprofile', views.PlantProfileViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),

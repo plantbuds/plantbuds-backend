@@ -1,6 +1,7 @@
 bs4
 django
 djangorestframework
+django-filter
 pandas
 psycopg2
 python-dotenv

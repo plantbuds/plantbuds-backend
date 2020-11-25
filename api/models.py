@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.contrib.auth.models import User
 from django.contrib.postgres import fields
 
 class Users(models.Model):
@@ -42,7 +43,8 @@ class PbEncyclopedia(models.Model):
 class PlantProfile(models.Model):
     id = models.AutoField(primary_key=True)
     plant_id = models.IntegerField(blank=True, null=True)
-    user_id = models.IntegerField(blank=True,null=False)
+    user_id = models.ForeignKey(User, default=-1, db_column='user_id', on_delete=models.SET_DEFAULT)
+    # user_id = models.IntegerField(blank=True,null=False)
     plant_name = models.TextField(blank=True, null=True) 
     nickname = models.TextField(blank=True, null=True)
     photo = models.TextField(blank=True, null=True)
@@ -62,4 +64,4 @@ class PlantProfile(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'plant_Profile'
+        db_table = 'plant_profile'

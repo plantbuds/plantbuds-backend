@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import PbEncyclopedia
+from .models import PbEncyclopedia, PlantProfile
 from django.contrib.auth.models import User, Group
 
 
@@ -19,6 +19,7 @@ class EncyclopediaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PbEncyclopedia
         fields = ['id', 'name', 'water', 'sun', 'propagation', 'hardiness', 'url']
+
 
 class PlantProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
