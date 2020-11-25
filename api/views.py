@@ -35,47 +35,19 @@ class EncyclopediaViewSet(viewsets.ModelViewSet):
     serializer_class = EncyclopediaSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+
 class PlantProfileViewSet(viewsets.ModelViewSet):
     queryset = PlantProfile.objects.all()
     serializer_class = PlantProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        qs = self.queryset
-        qs1 = qs.filter(user=self.request.user)
-
-        return qs1
-    """
-    @action(detail=True, methods=['post'])
-    def add(self, request):
-        plant_list = PlantProfileViewSet.get_queryset()
-        serializer = PlantProfileSerializer(plant_list, many=True)
-        return Response(serializer.data)
-
-    def plant_profile(self, request):
-        if request.method == "GET":
-            plant_list = PlantProfile.objects.all()
-            serializer = PlantProfileSerializer(plant_list, many=True)
-            return Response(serializer.data, safe=False)
-
-    def create(self, request):
-        if request.method == "POST":
-            plant_list = PlantProfileViewSet.get_queryset()
-            serializer = PlantProfileSerializer(plant_list, many=True)
-            return Response(serializer.data, safe=False) 
-
-
-# Return list of all encyclopedia entries (test function, not REST!!)
-def encyclopedia(request):
-    if request.method == "GET":
-        plant_list = PbEncyclopedia.objects.all()
-        serializer = EncyclopediaSerializer(plant_list, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-def plantprofile(request):
-    if request.method == "GET":
-        plant_list = PlantProfile.objects.all()
-        serializer = PlantProfileSerializer(plant_list, many=True)
-        return JsonResponse(serializer.data, safe=False)
-"""
+        """
+        Get a user's list of plant profiles
+        """
+        queryset = PlantProfile.objects.all()
+        username = self.request.query_params.get('username', None)
+        if username is not None:
+            queryset = queryset.filter(user=User.objects.get(username=username))
+        return queryset
 

@@ -43,9 +43,8 @@ class PbEncyclopedia(models.Model):
 class PlantProfile(models.Model):
     id = models.AutoField(primary_key=True)
     plant_id = models.IntegerField(blank=True, null=True)
-    user_id = models.ForeignKey(User, default=-1, db_column='user_id', on_delete=models.SET_DEFAULT)
-    # user_id = models.IntegerField(blank=True,null=False)
-    plant_name = models.TextField(blank=True, null=True) 
+    user = models.ForeignKey(User, models.SET_NULL, blank=True, null=True)
+    plant_name = models.TextField(blank=True, null=True)
     nickname = models.TextField(blank=True, null=True)
     photo = models.TextField(blank=True, null=True)
     water_history = fields.ArrayField(models.DateField(blank=True, null=True))
@@ -63,5 +62,4 @@ class PlantProfile(models.Model):
         return self.plant_id
 
     class Meta:
-        managed = False
         db_table = 'plant_profile'
