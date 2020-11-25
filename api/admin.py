@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PbEncyclopedia, PlantProfile, Users
+from .models import PbEncyclopedia, PlantProfile, UserProfile
 
 # Register your models here.
 admin.site.register(PbEncyclopedia)

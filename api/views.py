@@ -136,5 +136,5 @@ class PlantProfileViewSet(viewsets.ModelViewSet):
         queryset = PlantProfile.objects.all()
         username = self.request.query_params.get('username', None)
         if username is not None:
-            queryset = queryset.filter(user=User.objects.get(username=username))
+            queryset = queryset.filter(user=UserProfile.objects.get(username=username))
         return queryset
