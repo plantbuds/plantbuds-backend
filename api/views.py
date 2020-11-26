@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.sites import requests
 from django.db.utils import IntegrityError
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, filters
 
 from .models import PbEncyclopedia, UserProfile, PlantProfile
 from .serializers import EncyclopediaSerializer, UserSerializer, UserProfileSerializer, \
@@ -122,6 +121,8 @@ class EncyclopediaViewSet(viewsets.ModelViewSet):
     queryset = PbEncyclopedia.objects.all()
     serializer_class = EncyclopediaSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'family', 'genus', 'species']
 
 
 class PlantProfileViewSet(viewsets.ModelViewSet):
