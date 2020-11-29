@@ -101,7 +101,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
         except UserProfile.DoesNotExist:
             return Response(
                 {'msg': 'user not found'},
-                status=status.HTTP_200_OK,
+                status=status.HTTP_404_NOT_FOUND,
             )
 
 
