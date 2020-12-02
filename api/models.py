@@ -19,9 +19,9 @@ class UserProfile(models.Model):
     password = models.TextField(blank=True, null=True)
     email = models.TextField(null=True, unique=True)
     USDA_zone = models.TextField(blank=True, null=True)
-    receive_water_notif = models.BooleanField(blank=True, null=True)
-    receive_repot_notif = models.BooleanField(blank=True, null=True)
-    receive_fertilizing_notif = models.BooleanField(blank=True, null=True)
+    receive_water_notif = models.BooleanField(blank=True, null=True, default=False)
+    receive_repot_notif = models.BooleanField(blank=True, null=True, default=False)
+    receive_fertilizing_notif = models.BooleanField(blank=True, null=True, default=False)
     notif_time = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
