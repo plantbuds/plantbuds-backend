@@ -60,6 +60,7 @@ class PlantProfile(models.Model):
     plant_name = models.TextField(blank=True, null=True)
     nickname = models.TextField(blank=True, null=True, default="My Plant")
     photo = models.TextField(blank=True, null=True, default="https://i.imgur.com/4os1ZjY.png")
+    history = fields.ArrayField(models.TextField(blank=True, null=True), blank=True, null=True)
     water_history = fields.ArrayField(models.DateField(blank=True, null=True), blank=True, null=True)
     fertilize_history = fields.ArrayField(models.DateField(blank=True, null=True), blank=True, null=True)
     repot_history = fields.ArrayField(models.DateField(blank=True, null=True), blank=True, null=True)
@@ -69,7 +70,7 @@ class PlantProfile(models.Model):
     water_next_notif = models.DateField(blank=True, null=True)
     fertilize_next_notif = models.DateField(blank=True, null=True) 
     repot_next_notif = models.DateField(blank=True, null=True)
-    notes = fields.ArrayField(models.TextField(blank=True, null=True), blank=True, null=True)
+    notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.plant_name
