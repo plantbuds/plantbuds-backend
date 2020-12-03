@@ -129,6 +129,8 @@ class PlantProfileViewSet(viewsets.ModelViewSet):
     queryset = PlantProfile.objects.all()
     serializer_class = PlantProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['plant_name', 'nickname']
 
     def get_queryset(self):
         """
