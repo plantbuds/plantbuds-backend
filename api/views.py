@@ -66,7 +66,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
         except IntegrityError:
             return Response(
                 {'error': 'user already exists in user profile table'},
-                status=status.HTTP_400_BAD_REQUEST,
+                status=status.HTTP_409_CONFLICT,
             )
         except:
             return Response(
