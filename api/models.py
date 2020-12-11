@@ -70,6 +70,9 @@ class PlantProfile(models.Model):
     water_next_notif = models.DateTimeField(blank=True, null=True)
     fertilize_next_notif = models.DateTimeField(blank=True, null=True)
     repot_next_notif = models.DateTimeField(blank=True, null=True)
+    water_notif_id = models.TextField(blank=True, null=True)
+    fertilize_notif_id = models.TextField(blank=True, null=True)
+    repot_notif_id = models.TextField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
