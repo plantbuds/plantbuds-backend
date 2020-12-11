@@ -67,9 +67,9 @@ class PlantProfile(models.Model):
     water_frequency = models.IntegerField(blank=True, null=True) 
     fertilize_frequency = models.IntegerField(blank=True, null=True)
     repot_frequency = models.IntegerField(blank=True, null=True)
-    water_next_notif = models.DateField(blank=True, null=True)
-    fertilize_next_notif = models.DateField(blank=True, null=True) 
-    repot_next_notif = models.DateField(blank=True, null=True)
+    water_next_notif = models.DateTimeField(blank=True, null=True)
+    fertilize_next_notif = models.DateTimeField(blank=True, null=True)
+    repot_next_notif = models.DateTimeField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
 
     def __str__(self):
